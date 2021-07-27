@@ -18,7 +18,7 @@ function App() {
         </nav>
         <Switch>
           <Route path="/">
-            <h1>Maia Survey</h1>
+            <h1>Maia Survey UDATED</h1>
           </Route>
           <Route path="/about">
             <h1>About</h1>
