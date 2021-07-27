@@ -17,11 +17,11 @@ function App() {
           </ul>
         </nav>
         <Switch>
-          <Route path="/about">
-            <h1>About</h1>
-          </Route>
           <Route path="/">
             <h1>Maia Survey</h1>
+          </Route>
+          <Route path="/about">
+            <h1>About</h1>
           </Route>
         </Switch>
       </div>
