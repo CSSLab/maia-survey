@@ -14,11 +14,14 @@ function App() {
             <li>
               <Link to="/about">About</Link>
             </li>
+            <li>
+              <a href="/static">Old Site</a>
+            </li>
           </ul>
         </nav>
         <Switch>
           <Route path="/">
-            <h1>Maia Survey UDATED</h1>
+            <h1>Maia Survey</h1>
           </Route>
           <Route path="/about">
             <h1>About</h1>
