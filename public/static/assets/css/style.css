@@ -1,0 +1,252 @@
+:root {
+  /*--light_background: rgb(207, 207, 207);*/
+  /*--light_background: rgb(340, 340, 340);*/
+  --light_background: #FFF8ED;
+  /*--light_background: #FFF8E7; */
+  --dark_background: rgb(29, 36, 37);
+}
+
+@media only screen and (max-width: 400px) {
+   .container {
+     padding-left: 0;
+     padding-right: 0;
+   }
+}
+
+.navbar-custom {
+  background-color: var(--dark_background);
+  width: 100vw;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+
+body {
+    background-color: var(--light_background);
+}
+
+.infopage {
+    color: black;
+    text-align: center;
+}
+
+code {
+  display: block;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+h3 {
+    color: rgb(43, 43, 43);
+    text-align: center;
+    font-weight: 600;
+}
+
+h4 {
+  margin-top:2cm;
+}
+
+.intro {
+  background-color: var(--dark_background);
+}
+
+.intro {
+  min-height: 100vh;
+}
+
+.content-section  {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background: var(--dark_background);
+}
+
+@media only screen and (max-width: 600px) {
+  .acks > div >div > h2 {
+    font-size: 16pt;
+  }
+  .content-section .container {
+    margin-left: 1em;
+    margin-right: 1em;
+    text-align:justify;
+    padding-right:.5em
+  }
+}
+
+.text_column {
+  text-align:justify;
+}
+
+.light-section {
+  background: var(--light_background);
+  color: rgb(43, 43, 43);
+}
+
+.observer-diagram {
+  width: 100%;
+}
+
+.people-list {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    text-align: center;
+}
+
+.person {
+    display: flex;
+    flex-flow: column;
+    background: gray;
+    align-items: stretch;
+    justify-content: space-between;
+    min-width: 270px;
+    flex: 0 0 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.person-line {
+    display: flex;
+    flex-flow: row;
+    background: gray;
+    justify-content: space-evenly;
+    align-items: stretch;
+    font-size: 3rem;
+}
+
+.person-line > .person-link {
+    font-size: 4rem;
+    width: 100%;
+}
+
+.person-line > .person-link:nth-child(1) {
+    background: rgb(201, 125, 74);
+}
+.person-line > .person-link:nth-child(2) {
+    background: rgb(214, 177, 73);
+}
+.person-line > .person-link:nth-child(3) {
+    background: rgb(201, 212, 45);
+}
+
+.person > .person-line:nth-child(1) {
+    padding-top: 1em;
+}
+.person-image {
+    width: 200px;
+    height: 200px;
+}
+
+.left-justify-section > p {
+    text-align: left;
+}
+
+.paper-section >div>div > p {
+    font-size: 2rem;
+    white-space: pre-wrap;
+}
+
+.abstract {
+  font-family: 'serif';
+}
+
+.details_section {
+  padding-top: 0;
+  width: 100%;
+}
+
+.details_slide {
+  color: rgb(43, 43, 43);
+  min-height: 80vh;
+  width: 100%;
+}
+
+.details_section > .details_slide {
+  background-color: var(--light_background);
+}
+
+.models_table td, .models_table th {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.model_name {
+  font-family: monospace;
+}
+
+.closing-remark {
+  padding-top: 2em;
+}
+
+.bar_plot_div {
+  position:relative;
+  margin: auto;
+  width : 100%;
+  max-width: 600px;
+}
+
+
+
+.line_plot_container {
+  position:relative;
+  margin: auto;
+  width : 100%;
+  max-width: 600px;
+}
+@media only screen and (max-width: 800px) {
+  .bar_plot_div {
+    max-width: 100vw;
+  }
+  .line_plot_container {
+    max-width: 90vw;
+    padding-bottom: 2em;
+  }
+  figcaption {
+    padding-bottom: 2em;
+  }
+}
+
+footer {
+    background: gray;
+}
+
+.footer-container {
+    display:  flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    opacity: .8;
+}
+
+.footer-container > p {
+    width: 20%;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+@media only screen and (max-width: 600px) {
+  .footer-container > p {
+      width: 100%;
+      padding-left:1em;
+      padding-right:1em;
+  }
+}
+.widget_embed {
+    width:1000px;
+    height:1200px;
+    background-color: transparent;
+    border: 0px none transparent;
+    padding: 0px;
+    overflow: hidden;
+}
+
+th, td {
+  padding: 15px;
+}
