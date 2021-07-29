@@ -1,0 +1,26 @@
+@import "../../styles/foundation/_layout.scss";
+@import "../../styles/foundation/_colours.scss";
+
+.header-container {
+  @extend .row;
+  background-color: $lower-contrast;
+  color: $high-contrast;
+  justify-content: space-between;
+
+  padding-left: 10vw;
+  padding-right: 8vw;
+
+  h2 {
+    font-weight: 400;
+  }
+}
+
+.header-menu {
+  @extend .row;
+
+  a {
+    text-decoration: none !important;
+    color: $higher-contrast;
+    padding: 5px;
+  }
+}
