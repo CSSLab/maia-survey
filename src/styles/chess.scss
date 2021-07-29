@@ -1,0 +1,23 @@
+@import "./foundation/base.scss";
+
+.board-container {
+  width: 70vh;
+  height: 70vh;
+  max-width: 70vw;
+  max-height: 70vw;
+
+  @include tablet {
+    width: 65vh;
+    height: 65vh;
+    max-width: 65vw;
+    max-height: 65vw;
+  }
+
+  @include mobile {
+    width: 98vw;
+    height: 98vw;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 0.5vw;
+  }
+}
