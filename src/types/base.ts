@@ -13,4 +13,7 @@ export interface GameState {
   check: false | Color;
 }
 
+export type Move = [number, Ply, Ply?];
+export type Moves = Move[];
+export type Ply = string;
 export type Color = "white" | "black";
