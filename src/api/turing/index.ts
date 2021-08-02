@@ -9,7 +9,7 @@ export const getGame = async () => {
   return json;
 };
 
-export const submitGuess = async (guess: string, gameId: string) => {
+export const submitGuess = async (gameId: string, guess: string) => {
   const res = await fetch(buildUrl("turing/game_guess"), {
     headers: getDefaultHeaders(),
     method: "POST",
