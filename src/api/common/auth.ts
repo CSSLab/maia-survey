@@ -53,3 +53,13 @@ export const getEncodedAccessToken = async (): Promise<string> => {
   const token = localStorage.getItem(JWT_ACCESS_KEY);
   return token ?? "";
 };
+
+export const getAuthHeader = (): string => `Bearer ${getEncodedAccessToken()}`;
+
+export const getDefaultHeaders = () => {
+  const headers: { [key: string]: string } = {};
+
+  headers.Authorization = getAuthHeader();
+  headers["Content-Type"] = "application/json";
+  return headers;
+};
