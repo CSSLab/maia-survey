@@ -12,6 +12,7 @@ import {
   useEventNumber,
   UseBoardController,
   useBoardController,
+  UseGamesHook,
 } from "../common";
 
 export type UseTuringSubmissionControllerHook = (
@@ -54,18 +55,18 @@ export const useTuringSubmissionController: UseTuringSubmissionControllerHook =
     ];
   };
 
+const useGamesHook = () => useGames<TuringGame>();
+
 export type UseTuringHook = () => [
-  [TuringGame, () => Promise<void>, TuringGame[], number, SetIndexFunction],
+  ReturnType<typeof useGamesHook>,
   ReturnType<UseBoardController>,
-  ReturnType<UseTuringSubmissionControllerHook>
+  ReturnType<UseTuringSubmissionControllerHook>,
+  VoidFunction
 ];
 
 const useTuring: UseTuringHook = () => {
-  const [
-    [games, addSubmissionToGame, addGame],
-    [currentGameIndex, setCurrentGameIndex],
-  ] = useGames<TuringGame>();
-
+  const gamesController = useGamesHook();
+  const [currentGame, [games, addSubmissionToGame, addGame]] = gamesController;
   const [getEventNumber, resetEventNumber] = useEventNumber();
   const fetchNewGame = useCallback(async () => {
     const game = await getGame();
@@ -79,30 +80,25 @@ const useTuring: UseTuringHook = () => {
     }
   }, [fetchNewGame, games.length]);
 
-  const currentGame = useMemo(
-    () => games[currentGameIndex],
-    [games, currentGameIndex]
-  ) ?? { moves: [], gameStates: [] };
-
   const logBoardControlEvent = useCallback(
     (event: any) => {
-      if (currentGame.gameId)
-        postEvent(currentGame.gameId, {
+      if (currentGame?.gameId)
+        postEvent(currentGame?.gameId, {
           event_number: getEventNumber(),
           ...event,
         });
     },
-    [currentGame.gameId, getEventNumber]
+    [currentGame, getEventNumber]
   );
 
   const boardController = useBoardController(
-    (currentGame.gameStates ?? []).length,
+    (currentGame?.gameStates ?? []).length,
     logBoardControlEvent
   );
 
   const logGuessEvent = useCallback(
     (event: any) => {
-      if (currentGame.gameId)
+      if (currentGame?.gameId)
         postEvent(currentGame.gameId, {
           event_number: getEventNumber(),
           board_flipped: boardController[2][0] === "black",
@@ -110,19 +106,21 @@ const useTuring: UseTuringHook = () => {
           ...event,
         });
     },
-    [boardController, currentGame.gameId, getEventNumber]
+    [boardController, currentGame, getEventNumber]
   );
 
   const turingSubmissionController = useTuringSubmissionController(
-    currentGame.gameId,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    currentGame?.gameId ?? "",
     logGuessEvent,
     addSubmissionToGame
   );
 
   return [
-    [currentGame, fetchNewGame, games, currentGameIndex, setCurrentGameIndex],
+    gamesController,
     boardController,
     turingSubmissionController,
+    fetchNewGame,
   ];
 };
 

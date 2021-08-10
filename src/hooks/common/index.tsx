@@ -2,13 +2,18 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Color, SetIndexFunction, SubmissionFeedback } from "../../types";
 
 export type UseGamesHook = <T>() => [
+  T | null,
   [T[], (submission: SubmissionFeedback) => void, (game: T) => void],
-  [number, SetIndexFunction]
+  [number, SetIndexFunction],
+  [number, number]
 ];
 
 export const useGames: UseGamesHook = <T,>() => {
   const [games, setGames] = useState<{ [gameId: string]: T }>({});
   const [currentGameIndex, setCurrentGameIndex] = useState<number>(0);
+  const [[correctCount, totalCount], setCount] = useState<[number, number]>([
+    0, 0,
+  ]);
 
   const addGame = useCallback(
     (game) => {
@@ -27,15 +32,25 @@ export const useGames: UseGamesHook = <T,>() => {
         [submission.gameId]: { ...game, feedback: submission },
       };
       setGames(newGames);
+      if (submission.guessCorrect) setCount([correctCount + 1, totalCount + 1]);
+      else setCount([correctCount, totalCount + 1]);
     },
-    [games]
+    [correctCount, games, totalCount]
   );
 
   const gamesArray = useMemo(() => Object.values(games), [games]);
 
+  const currentGame =
+    useMemo(
+      () => gamesArray[currentGameIndex],
+      [gamesArray, currentGameIndex]
+    ) ?? null;
+
   return [
+    currentGame,
     [gamesArray, addSubmissionToGame, addGame],
     [currentGameIndex, setCurrentGameIndex],
+    [correctCount, totalCount],
   ];
 };
 

@@ -26,6 +26,7 @@ export const getGame = async () => {
       rows
     );
   }, []) as Moves;
+
   return {
     gameId,
     result,
@@ -88,6 +89,7 @@ export const postEvent = async (gameId: string, event: any) => {
       ...event,
     }),
   });
+
   const json = await res.json();
   return json;
 };
