@@ -1,5 +1,16 @@
-@import "../../styles/foundation/_layout.scss";
-@import "../../styles/foundation/_colours.scss";
+@import "../../styles/foundation/layout";
+@import "../../styles/foundation/colours";
+
+.highlight {
+  transition: 0.18s;
+  color: $higher-contrast;
+  font-weight: 300;
+
+  &:hover {
+    color: $highest-contrast;
+    cursor: pointer;
+  }
+}
 
 .header-container {
   @extend .row;
@@ -13,14 +24,68 @@
   h2 {
     font-weight: 400;
   }
+
+  p {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    @extend .highlight;
+  }
+
+  a {
+    text-decoration: none !important;
+    padding: 10px;
+
+    @extend .highlight;
+  }
 }
 
 .header-menu {
   @extend .row;
 
-  a {
-    text-decoration: none !important;
-    color: $higher-contrast;
-    padding: 5px;
+  span {
+    font-weight: 400;
+    color: $high-contrast;
   }
+}
+
+.auth-container {
+  position: relative;
+  display: inline-block;
+  min-width: 150px;
+
+  button {
+    text-decoration: none !important;
+    padding: 10px;
+    background-color: $lower-contrast;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+
+    @extend .highlight;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    display: none;
+
+    color: $highest-contrast;
+    position: absolute;
+    z-index: 50;
+    width: 100%;
+    background-color: $lower-contrast;
+    border-radius: 2px;
+    transition: 0.2s;
+  }
+}
+
+.auth-container:hover .dropdown-menu {
+  @extend .col;
+}
+
+.dropdown-menu:hover {
+  @extend .col;
 }
