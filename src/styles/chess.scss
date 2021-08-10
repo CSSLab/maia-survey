@@ -1,4 +1,4 @@
-@import "./foundation/base.scss";
+@import "./foundation/base";
 
 .board-container {
   width: 70vh;
@@ -19,5 +19,82 @@
     max-width: 100%;
     max-height: 100%;
     padding: 0.5vw;
+  }
+}
+
+.ply-container {
+  padding: 3px;
+  width: 80px;
+  justify-content: "flex-start";
+  display: flex;
+
+  &:hover {
+    background-color: $low-contrast;
+  }
+}
+
+.selected-ply {
+  color: $high-contrast;
+}
+
+.index-container {
+  margin: 3px;
+  width: 35px;
+}
+
+.move-container {
+  @extend .row;
+  justify-content: flex-start !important;
+}
+
+.moves-container {
+  @extend .bordered;
+  @extend .shadowed;
+  background-color: $lower-contrast;
+  height: $base-height;
+  max-height: $base-width;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-top: -5px;
+
+  font-size: 19px !important;
+  font-weight: 400;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: $lowest-contrast;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba($low-contrast, 0.6);
+  border-radius: 1px;
+
+  &:hover {
+    background: rgba($low-contrast, 0.9);
+  }
+}
+
+.button-group {
+  @extend .row;
+  margin: auto;
+  align-items: unset;
+
+  & button {
+    @extend .base-button;
+    padding: 0px 14px 2px 14px;
+    font-size: 22px;
+
+    @include tablet {
+      font-size: 18px;
+      padding: 0px 10px 4px 10px;
+    }
+
+    @include mobile {
+      font-size: 15px;
+    }
   }
 }
