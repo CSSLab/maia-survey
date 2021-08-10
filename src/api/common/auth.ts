@@ -4,6 +4,10 @@ export const JWT_ACCESS_KEY = "jwt:access";
 export const JWT_USER_ID = "jwt:user_id";
 export const JWT_EXPIRATION_TIME = "jwt:expiration_time";
 export const JWT_USER_NAME = "jwt:user_name";
+export const JWT_AUTH_STATUS = "jwt:auth_status";
+
+export const AUTH_STATUS_LOGGED_OUT = "AUTH_STATUS:LOGGED_OUT";
+export const AUTH_STATUS_LOGGED_IN = "AUTH_STATUS:LOGGED_IN";
 
 export const storeAuthInformation = (
   token: string,
@@ -17,7 +21,10 @@ export const storeAuthInformation = (
     (Date.now() + 1600 * 1000).toString()
   );
   localStorage.setItem(JWT_USER_ID, id);
-  localStorage.setItem(JWT_USER_ID, lichessUsername ?? providedUsername ?? id);
+  localStorage.setItem(
+    JWT_USER_NAME,
+    lichessUsername ?? providedUsername ?? id
+  );
 };
 
 export const register = async () => {
@@ -33,9 +40,16 @@ export const register = async () => {
 
 export const authenticate = async () => {
   const userId = localStorage.getItem(JWT_USER_ID);
-  const res = await fetch(buildUrl(`auth/login_id?user_id=${userId}`), {
-    method: "POST",
-  });
+  const res = await fetch(
+    buildUrl(
+      `auth/login_id?user_id=${userId}&screen_width=${
+        Math.floor(window.screen.width / 100) * 100
+      }&screen_height=${Math.floor(window.screen.height / 100) * 100}`
+    ),
+    {
+      method: "POST",
+    }
+  );
   const {
     user_id: id,
     jwt: { access_token: token },
@@ -54,12 +68,13 @@ export const getEncodedAccessToken = async (): Promise<string> => {
   return token ?? "";
 };
 
-export const getAuthHeader = (): string => `Bearer ${getEncodedAccessToken()}`;
+export const getAuthHeader = async () =>
+  `Bearer ${await getEncodedAccessToken()}`;
 
-export const getDefaultHeaders = () => {
+export const getDefaultHeaders = async () => {
   const headers: { [key: string]: string } = {};
 
-  headers.Authorization = getAuthHeader();
+  headers.Authorization = await getAuthHeader();
   headers["Content-Type"] = "application/json";
   return headers;
 };
