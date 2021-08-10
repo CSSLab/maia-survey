@@ -1,0 +1,95 @@
+@import "./foundation/base";
+
+$selected-btn-color: rgba($lowest-contrast, 0.6);
+
+.submission-group {
+  @extend .row;
+  @extend .bordered;
+  background-color: $lower-contrast;
+  min-width: 200px;
+}
+
+.submission-container {
+  p {
+    padding: 0;
+    margin: 0;
+    font-weight: 300;
+    font-size: 20px;
+    text-align: left;
+  }
+
+  @extend .col;
+  @extend .stretched;
+  background-color: $lowest-contrast;
+  margin-right: 5px;
+  width: 250px;
+
+  button {
+    @extend .col;
+    @extend .shadowed;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    border: none;
+    background-color: rgba($low-contrast, 0.1);
+    color: $higher-contrast;
+    border-radius: 2px;
+    transition: 0.15s;
+    margin: 1px;
+  }
+
+  button:hover {
+    background-color: rgba($low-contrast, 0.4);
+  }
+
+  .selected {
+    box-shadow: none;
+    background-color: $selected-btn-color;
+  }
+
+  .selected:hover {
+    background-color: $selected-btn-color;
+  }
+
+  textarea {
+    background-color: inherit;
+    @extend .bordered;
+    @extend .shadowed;
+    height: 1.5em;
+    width: 100%;
+
+    color: $higher-contrast;
+    font-size: 16px;
+    padding: 4px;
+    resize: none;
+    font-family: inherit;
+    transition: 0.2s;
+  }
+
+  textarea:focus {
+    border-color: $higher-contrast;
+    height: 7em;
+    outline: none;
+    @extend .shadowed;
+  }
+
+  .submission-button {
+    background-color: rgba($low-contrast, 0.3);
+    color: $highest-contrast;
+  }
+
+  .submission-button:disabled {
+    background-color: $lower-contrast;
+    color: $high-contrast;
+  }
+
+  .stats-container {
+    @extend .bordered;
+    @extend .shadowed;
+    background-color: $lower-contrast;
+
+    h4 {
+      line-height: 1em;
+    }
+  }
+}
