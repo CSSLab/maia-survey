@@ -1,18 +1,12 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getGame, postEvent, submitGuess } from "../../api";
-import {
-  Color,
-  SetIndexFunction,
-  SubmissionFeedback,
-  TuringGame,
-} from "../../types";
+import { Color, SubmissionFeedback, TuringGame } from "../../types";
 
 import {
   useGames,
   useEventNumber,
   UseBoardController,
   useBoardController,
-  UseGamesHook,
 } from "../common";
 
 export type UseTuringSubmissionControllerHook = (
