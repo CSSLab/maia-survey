@@ -1,6 +1,6 @@
 import { Game } from "./base";
 
-export interface SubmissionFeedback {
+export interface TuringSubmissionFeedback {
   gameId: string;
   whiteIsBot: boolean;
   blackIsBot: boolean;
@@ -14,5 +14,5 @@ export interface SubmissionFeedback {
 }
 
 export interface TuringGame extends Game {
-  feedback?: SubmissionFeedback;
+  feedback?: TuringSubmissionFeedback;
 }

@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Color, SetIndexFunction, SubmissionFeedback } from "../../types";
+import { Color, SetIndexFunction, TuringSubmissionFeedback } from "../../types";
 
 export type UseGamesHook = <T>() => [
   T | null,
-  [T[], (submission: SubmissionFeedback) => void, (game: T) => void],
+  [T[], (submission: TuringSubmissionFeedback) => void, (game: T) => void],
   [number, SetIndexFunction],
   [number, number]
 ];
@@ -25,7 +25,7 @@ export const useGames: UseGamesHook = <T,>() => {
   );
 
   const addSubmissionToGame = useCallback(
-    (submission: SubmissionFeedback) => {
+    (submission) => {
       const game = games[submission.gameId];
       const newGames = {
         ...games,

@@ -1,8 +1,8 @@
-import { Moves, Plys, SubmissionFeedback } from "../../types";
+import { Moves, Plys, TuringSubmissionFeedback } from "../../types";
 import { getDefaultHeaders } from "../common";
 import { buildUrl } from "../common/utils";
 
-export const getGame = async () => {
+export const getTuringGame = async () => {
   const res = await fetch(buildUrl("turing/new_game"), {
     headers: await getDefaultHeaders(),
   });
@@ -37,11 +37,11 @@ export const getGame = async () => {
   };
 };
 
-export const submitGuess = async (
+export const submitTuringGuess = async (
   gameId: string,
   guess: string,
   comment?: string
-): Promise<SubmissionFeedback> => {
+): Promise<TuringSubmissionFeedback> => {
   const res = await fetch(buildUrl("turing/game_guess"), {
     headers: await getDefaultHeaders(),
     method: "POST",
@@ -76,10 +76,10 @@ export const submitGuess = async (
     blackName,
     timeControl,
     gameType,
-  } as SubmissionFeedback;
+  } as TuringSubmissionFeedback;
 };
 
-export const postEvent = async (gameId: string, event: any) => {
+export const postTuringEvent = async (gameId: string, event: any) => {
   const res = await fetch(buildUrl("turing/log_game_event"), {
     headers: await getDefaultHeaders(),
     method: "POST",

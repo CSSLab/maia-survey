@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import Chessground from "@react-chess/chessground";
 
 import "./styles.scss";
@@ -6,7 +6,7 @@ import { useTuring } from "../../../hooks";
 import MovesContainer from "../../../components/movesContainer";
 import BoardController from "../../../components/boardController";
 import GameResultContainer from "../../../components/gameResultContainer";
-import { GameResult, SubmissionFeedback } from "../../../types";
+import { GameResult, TuringSubmissionFeedback } from "../../../types";
 import HistoryContainer from "../../../components/historyContainer";
 
 const turingSubmissionToGameResult = ({
@@ -19,7 +19,7 @@ const turingSubmissionToGameResult = ({
   blackName,
   blackRating,
   blackIsBot,
-}: SubmissionFeedback): GameResult => {
+}: TuringSubmissionFeedback): GameResult => {
   return {
     gameId,
     gameType,

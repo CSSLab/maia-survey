@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { getGame, postEvent, submitGuess } from "../../api";
-import { Color, SubmissionFeedback, TuringGame } from "../../types";
+import { getTuringGame, postTuringEvent, submitTuringGuess } from "../../api";
+import { Color, TuringSubmissionFeedback, TuringGame } from "../../types";
 
 import {
   useGames,
@@ -12,7 +12,7 @@ import {
 export type UseTuringSubmissionControllerHook = (
   gameId: string,
   logEvent: (event: any) => void,
-  onSubmit: (submission: SubmissionFeedback) => void
+  onSubmit: (submission: TuringSubmissionFeedback) => void
 ) => [
   [Color | null, (color: Color) => void, () => Promise<void>],
   [string, (text: string) => void]
@@ -36,7 +36,7 @@ export const useTuringSubmissionController: UseTuringSubmissionControllerHook =
 
     const handleSubmitGuess = useCallback(async () => {
       if (guess) {
-        const feedback = await submitGuess(gameId, guess, submissionText);
+        const feedback = await submitTuringGuess(gameId, guess, submissionText);
         onSubmit(feedback);
         setGuess(null);
         setSubmissionText("");
@@ -63,7 +63,7 @@ const useTuring: UseTuringHook = () => {
   const [currentGame, [games, addSubmissionToGame, addGame]] = gamesController;
   const [getEventNumber, resetEventNumber] = useEventNumber();
   const fetchNewGame = useCallback(async () => {
-    const game = await getGame();
+    const game = await getTuringGame();
     resetEventNumber();
     addGame(game);
   }, [addGame, resetEventNumber]);
@@ -77,7 +77,7 @@ const useTuring: UseTuringHook = () => {
   const logBoardControlEvent = useCallback(
     (event: any) => {
       if (currentGame?.gameId)
-        postEvent(currentGame?.gameId, {
+        postTuringEvent(currentGame?.gameId, {
           event_number: getEventNumber(),
           ...event,
         });
@@ -93,7 +93,7 @@ const useTuring: UseTuringHook = () => {
   const logGuessEvent = useCallback(
     (event: any) => {
       if (currentGame?.gameId)
-        postEvent(currentGame.gameId, {
+        postTuringEvent(currentGame.gameId, {
           event_number: getEventNumber(),
           board_flipped: boardController[2][0] === "black",
           ply: boardController[0][0],

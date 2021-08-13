@@ -13,6 +13,7 @@ export interface GameState {
   fen: string;
   check: false | Color;
 }
+
 export interface Player {
   name: string;
   rating: number;
