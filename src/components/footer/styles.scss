@@ -1,0 +1,16 @@
+@import "../../styles/foundation/colours";
+
+.footer {
+  margin-top: auto;
+  margin-bottom: 1em;
+  p {
+    font-size: 0.8em;
+    margin-block-start: 0.1em;
+    margin-block-end: 0.1em;
+  }
+
+  a {
+    @extend .highlight;
+    text-decoration: none;
+  }
+}

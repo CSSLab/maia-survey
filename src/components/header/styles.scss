@@ -1,17 +1,6 @@
 @import "../../styles/foundation/layout";
 @import "../../styles/foundation/colours";
 
-.highlight {
-  transition: 0.18s;
-  color: $higher-contrast;
-  font-weight: 300;
-
-  &:hover {
-    color: $highest-contrast;
-    cursor: pointer;
-  }
-}
-
 .header-container {
   @extend .row;
   background-color: $lower-contrast;

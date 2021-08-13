@@ -11,3 +11,14 @@ $survey-in-progress: #bf811d;
 $survey-feedback-correct: #629924;
 $survey-feedback-incorrect: #c23;
 $survey-feedback-current: #3692e7;
+
+.highlight {
+  transition: 0.18s;
+  color: $higher-contrast;
+  font-weight: 300;
+
+  &:hover {
+    color: $highest-contrast;
+    cursor: pointer;
+  }
+}

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AUTH_STATUS_LOGGED_OUT, JWT_AUTH_STATUS } from "./api";
 import "./App.css";
-import { Header } from "./components";
+import { Footer, Header } from "./components";
 import useAuthController from "./hooks/auth";
 import { Turing } from "./routes";
 
@@ -29,6 +29,7 @@ function App() {
             <Turing />
           </Route>
         </Switch>
+        <Footer />
       </div>
     </Router>
   );
