@@ -3,11 +3,13 @@ import Chessground from "@react-chess/chessground";
 
 import "./styles.scss";
 import { useTuring } from "../../../hooks";
-import MovesContainer from "../../../components/movesContainer";
-import BoardController from "../../../components/boardController";
-import GameResultContainer from "../../../components/gameResultContainer";
 import { GameResult, TuringSubmissionFeedback } from "../../../types";
-import HistoryContainer from "../../../components/historyContainer";
+import {
+  BoardController,
+  GameResultContainer,
+  HistoryContainer,
+  MovesContainer,
+} from "../../../components";
 
 const turingSubmissionToGameResult = ({
   gameId,

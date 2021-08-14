@@ -22,3 +22,7 @@ $survey-feedback-current: #3692e7;
     cursor: pointer;
   }
 }
+
+a {
+  @extend .highlight;
+}

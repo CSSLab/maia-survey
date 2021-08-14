@@ -1,24 +1,16 @@
 import React from "react";
 
+import Markdown from "../markdown";
+
 import "./styles.scss";
 
-const Footer = () => (
+interface Props {
+  children: string;
+}
+
+const Footer: React.FC<Props> = ({ children }: Props) => (
   <div className="footer">
-    <p>
-      You can get in touch with us by email at{" "}
-      <a
-        href="mailto:maiachess@cs.toronto.edu"
-        target="_blank"
-        rel="noreferrer"
-      >
-        maiachess@cs.toronto.edu
-      </a>{" "}
-      or on Twitter{" "}
-      <a href="https://twitter.com/maiachess" target="_blank" rel="noreferrer">
-        @maiachess
-      </a>
-      .
-    </p>
+    <Markdown>{children}</Markdown>
   </div>
 );
 

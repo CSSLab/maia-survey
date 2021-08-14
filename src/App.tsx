@@ -4,9 +4,11 @@ import { AUTH_STATUS_LOGGED_OUT, JWT_AUTH_STATUS } from "./api";
 import "./App.css";
 import { Footer, Header } from "./components";
 import useAuthController from "./hooks/auth";
-import { Turing } from "./routes";
+import { Turing, Home } from "./routes";
 
 import "./styles/foundation/_base.scss";
+
+import footerContent from "./content/footer";
 
 function App() {
   const authController = useAuthController();
@@ -23,13 +25,13 @@ function App() {
         <Header authController={authController} />
         <Switch>
           <Route path="/" exact>
-            <h1>Maia Survey</h1>
+            <Home />
           </Route>
           <Route path="/turing" exact>
             <Turing />
           </Route>
         </Switch>
-        <Footer />
+        <Footer>{footerContent}</Footer>
       </div>
     </Router>
   );
