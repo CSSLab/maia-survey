@@ -21,14 +21,14 @@ const GameResultContainer: React.FC<Props> = ({
         </div>
         <div className="row">
           <p>
-            <span>{white.name}</span> {white.rating}{" "}
-            {white.isBot ? <>&#129302;</> : null}
+            <span className="circle">&#9679;</span> <span>{white.name}</span>{" "}
+            {white.rating} {white.isBot ? <>&#129302;</> : null}
           </p>
         </div>
         <div className="row">
           <p>
-            <span>{black.name}</span> {black.rating}{" "}
-            {black.isBot ? <>&#129302;</> : null}
+            <span className="circle">&#9675;</span> <span>{black.name}</span>{" "}
+            {black.rating} {black.isBot ? <>&#129302;</> : null}
           </p>
         </div>
       </div>

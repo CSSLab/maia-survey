@@ -2,7 +2,7 @@
 
 .game-result-container {
   p {
-    font-size: 18px;
+    font-size: 16px !important;
     font-weight: 300;
   }
 
@@ -20,6 +20,13 @@
 
   span {
     font-weight: 500;
+  }
+
+  .circle {
+    font-size: 22px;
+    line-height: 0.7;
+    font-weight: 900;
+    color: white;
   }
 
   @extend .col;

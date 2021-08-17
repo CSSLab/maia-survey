@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { TURING_STATS_LOSSES, TURING_STATS_WINS } from "../../api";
 import { Color, SetIndexFunction, TuringSubmissionFeedback } from "../../types";
 
 export type UseGamesHook = <T>() => [
@@ -11,8 +12,13 @@ export type UseGamesHook = <T>() => [
 export const useGames: UseGamesHook = <T,>() => {
   const [games, setGames] = useState<{ [gameId: string]: T }>({});
   const [currentGameIndex, setCurrentGameIndex] = useState<number>(0);
+  const storedWinCount =
+    parseInt(localStorage.getItem(TURING_STATS_WINS) ?? "0", 10) ?? 0;
+  const storedLossCount =
+    parseInt(localStorage.getItem(TURING_STATS_LOSSES) ?? "0", 10) ?? 0;
   const [[correctCount, totalCount], setCount] = useState<[number, number]>([
-    0, 0,
+    storedWinCount,
+    storedWinCount + storedLossCount,
   ]);
 
   const addGame = useCallback(

@@ -4,10 +4,14 @@ import {
   AUTH_STATUS_LOGGED_IN,
   AUTH_STATUS_LOGGED_OUT,
   getEncodedAccessToken,
+  getTuringStats,
   JWT_AUTH_STATUS,
   JWT_USER_ID,
   JWT_USER_NAME,
   register,
+  TURING_STATS_LOSSES,
+  TURING_STATS_RANK,
+  TURING_STATS_WINS,
 } from "../../api";
 import { buildUrl } from "../../api/common/utils";
 
@@ -35,6 +39,16 @@ const useAuthController: UseAuthControllerHook = () => {
 
     setUserId(localStorage.getItem(JWT_USER_ID));
     setUserName(localStorage.getItem(JWT_USER_NAME));
+
+    const {
+      win_count: wins,
+      loss_count: losses,
+      rank,
+    } = await getTuringStats();
+
+    localStorage.setItem(TURING_STATS_WINS, wins);
+    localStorage.setItem(TURING_STATS_LOSSES, losses);
+    localStorage.setItem(TURING_STATS_RANK, rank);
     localStorage.setItem(JWT_AUTH_STATUS, AUTH_STATUS_LOGGED_IN);
   }, [userId]);
 

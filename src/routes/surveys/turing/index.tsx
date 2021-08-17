@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from "react";
 import Chessground from "@react-chess/chessground";
 
@@ -10,6 +11,7 @@ import {
   HistoryContainer,
   MovesContainer,
 } from "../../../components";
+import { TURING_STATS_RANK } from "../../../api";
 
 const turingSubmissionToGameResult = ({
   gameId,
@@ -118,14 +120,22 @@ const Turing = () => {
 
             <div className="submission-group">
               <button
-                disabled={
-                  (!guess && !game.feedback) ||
-                  currentGameIndex !== games.length - 1
-                }
                 className="submission-button"
-                onClick={game.feedback ? fetchGame : submitGuess}
+                onClick={
+                  currentGameIndex !== games.length - 1
+                    ? () => setCurrentGameIndex(games.length - 1)
+                    : game.feedback
+                    ? fetchGame
+                    : submitGuess
+                }
               >
-                <h1>{game.feedback ? "NEXT" : "SUBMIT"}</h1>
+                <h1>
+                  {currentGameIndex !== games.length - 1
+                    ? "CONTINUE"
+                    : game.feedback
+                    ? "NEXT"
+                    : "SUBMIT"}
+                </h1>
               </button>
             </div>
             {guess && (
@@ -152,7 +162,10 @@ const Turing = () => {
             </div>
             <div className="row">
               <h4 style={{ marginTop: 6 }}>
-                Rank <span>~20000</span>
+                Rank{" "}
+                <span>
+                  ~{localStorage.getItem(TURING_STATS_RANK) ?? "2000"}
+                </span>
               </h4>
             </div>
           </div>

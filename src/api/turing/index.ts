@@ -2,6 +2,10 @@ import { Moves, Plys, TuringSubmissionFeedback } from "../../types";
 import { getDefaultHeaders } from "../common";
 import { buildUrl } from "../common/utils";
 
+export const TURING_STATS_WINS = "turing:wins";
+export const TURING_STATS_LOSSES = "turing:losses";
+export const TURING_STATS_RANK = "turing:rank";
+
 export const getTuringGame = async () => {
   const res = await fetch(buildUrl("turing/new_game"), {
     headers: await getDefaultHeaders(),
