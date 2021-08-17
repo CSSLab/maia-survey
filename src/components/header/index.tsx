@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
+import { useInnerWidth } from "../../api";
 import { UseAuthControllerHook } from "../../hooks/auth";
 
 import "./styles.scss";
@@ -11,7 +12,37 @@ interface Props {
 const Header = ({
   authController: [userName, [login, authenticateWithLichess], logout],
 }: Props) => {
-  return (
+  const width = useInnerWidth();
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+
+  const toggleMenu = useCallback(() => setShowMenu(!showMenu), [showMenu]);
+
+  return width <= 750 ? (
+    <div className="header-container">
+      <h2>
+        <Link to="/">MAIA CHESS</Link>
+      </h2>
+      <div className="auth-container">
+        <button onClick={toggleMenu}>=</button>
+        <div className={showMenu ? "dropdown-menu-open " : "dropdown-menu"}>
+          <Link to="/turing">TURING</Link>
+          <Link to="/recall">RECALL</Link>
+          {userName ? (
+            <Link to="/" onClick={logout}>
+              LOGOUT
+            </Link>
+          ) : (
+            <Link to="/" onClick={login}>
+              LOGIN
+            </Link>
+          )}
+          <button onClick={authenticateWithLichess}>
+            AUTHENTICATE WITH LICHESS
+          </button>
+        </div>
+      </div>
+    </div>
+  ) : (
     <div className="header-container">
       <h2>
         <Link to="/">MAIA CHESS</Link>

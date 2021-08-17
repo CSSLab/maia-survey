@@ -1,5 +1,4 @@
-@import "../../styles/foundation/layout";
-@import "../../styles/foundation/colours";
+@import "../../styles/foundation/base";
 
 .header-container {
   @extend .row;
@@ -27,6 +26,11 @@
 
     @extend .highlight;
   }
+
+  @include mobile {
+    padding-left: 4vw;
+    padding-right: 4vw;
+  }
 }
 
 .header-menu {
@@ -50,6 +54,7 @@
     border: none;
     font-size: inherit;
     font-family: inherit;
+    width: 100%;
 
     @extend .highlight;
   }
@@ -57,18 +62,18 @@
   button:hover {
     cursor: pointer;
   }
+}
 
-  .dropdown-menu {
-    display: none;
+.dropdown-menu {
+  display: none;
 
-    color: $highest-contrast;
-    position: absolute;
-    z-index: 50;
-    width: 100%;
-    background-color: $lower-contrast;
-    border-radius: 2px;
-    transition: 0.2s;
-  }
+  color: $highest-contrast;
+  position: absolute;
+  z-index: 50;
+  width: 100%;
+  background-color: $lower-contrast;
+  border-radius: 2px;
+  transition: 0.2s;
 }
 
 .auth-container:hover .dropdown-menu {
@@ -76,5 +81,10 @@
 }
 
 .dropdown-menu:hover {
+  @extend .col;
+}
+
+.dropdown-menu-open {
+  @extend .dropdown-menu;
   @extend .col;
 }
