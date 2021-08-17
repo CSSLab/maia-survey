@@ -93,3 +93,13 @@ export const postTuringEvent = async (gameId: string, event: any) => {
   const json = await res.json();
   return json;
 };
+
+export const getTuringStats = async () => {
+  const res = await fetch(buildUrl("turing/player_stats"), {
+    headers: await getDefaultHeaders(),
+    method: "POST",
+  });
+
+  const json = await res.json();
+  return json;
+};
