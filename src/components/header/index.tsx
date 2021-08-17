@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
-import { useInnerWidth } from "../../api";
+import { useInnerWidth } from "../../hooks";
 import { UseAuthControllerHook } from "../../hooks/auth";
 
 import "./styles.scss";
