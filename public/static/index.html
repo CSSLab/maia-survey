@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+    rel="shortcut icon"
+    type="image/x-icon"
+    href="/static/assets/images/maia.ico"
+  />
+
+  <title>Maia Chess</title>
+  <meta property="og:image" content="https://survey.maiachess.com/static/assets/images/maia-diagram.png">
+  <meta property="og:description" content="Maia is trained on millions of human chess games to predict human moves at specific Elo levels." />
+  <meta property="og:title" content="Maia Chess" />
+  <meta property="og:url" content="https://maiachess.com" />
+  <link rel="canonical" href="https://maiachess.com">
+  <meta name="twitter:card" content="summary">
+  <meta property="twitter:title" content="Maia Chess">
+  <meta name="description" content="Maia is trained on millions of human chess games to predict human moves at specific Elo levels.">
+
+  <link href="/static/assets/css/bootstrap.css" rel="stylesheet">
+  <link href="/static/assets/grayscale/styles.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/assets/css/style.css" />
+  <link rel="stylesheet" href="/static/assets/css/fontawesome.css">
+
+<script src="/static/assets/js/jquery.js"></script>
+<script src="/static/assets/js/bootstrap.js"></script>
+<script src="/static/assets/js/jquery.easing.js"></script>
+<script src="/static/assets/grayscale/scripts.js"></script>
+
+<script src="/static/assets/js/Chart.js"></script>
+<script src="/static/assets/js/plots.js"></script>
+<script src="/static/assets/js/nav.js"></script>
+
+
+  <!-- Fathom - simple website analytics - https://github.com/usefathom/fathom -->
+  <!-- It's just a count of how many people visit and where they come from and is hosted on one of our own servers -->
+  <script>
+    (function (f, a, t, h, o, m) {
+      a[h] = a[h] || function () {
+        (a[h].q = a[h].q || []).push(arguments)
+      };
+      o = f.createElement('script'),
+        m = f.getElementsByTagName('script')[0];
+      o.async = 1; o.src = t; o.id = 'fathom-script';
+      m.parentNode.insertBefore(o, m)
+    })(document, window, 'https://analytics.reidmcy.com/tracker.js', 'fathom');
+    fathom('set', 'siteId', 'MXDCG');
+    fathom('trackPageview');
+  </script>
+  <!-- / Fathom -->
+
+<!-- Default Statcounter code for Maia site
+http://maiachess.com -->
+<script type="text/javascript">
+  var sc_project = 12438511;
+  var sc_invisible = 1;
+  var sc_security = "356e79fc";
+</script>
+<script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+<noscript>
+  <div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="https://statcounter.com/" target="_blank"><img class="statcounter"
+        src="https://c.statcounter.com/12438511/0/356e79fc/1/" alt="Web Analytics Made Easy -
+StatCounter"></a></div>
+</noscript>
+<!-- End of Statcounter Code -->
+
+
+</head>
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+        Menu <i class="fa fa-bars"></i>
+      </button>
+      <a class="navbar-brand page-scroll" href="#page-top">
+        Maia Chess
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <ul class="nav navbar-nav">
+        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+        <li class="hidden">
+          <a href="#page-top"></a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#main_info">Project</a>
+        </li>
+        <!-- <li>
+          <a class="page-scroll" href="#details">Details</a>
+        </li> -->
+
+        <li>
+          <a class="page-scroll" href="#paper">Paper</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#data">Data</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#team">Team</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="https://lichess.org/@/maia1"><i class="fas fa-chess-knight"></i> Play Maia</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="https://github.com/CSSLab/maia-chess"><i class="fab fa-github"></i> Code</a>
+        </li>
+
+        <li>
+          <a class="page-scroll email_list" href="https://forms.gle/jaQfzSGmaeMcu2UA7"><i class="fas fa-envelope-square"></i> Email List</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
+<body data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <section id="page-top" class="intro">
+  <div class="intro-body">
+      <h1>Maia Chess</h1>
+      <p class="intro-text">
+        A human-like neural network chess engine
+      </p>
+      <a href="#main_info" class="btn btn-circle page-scroll">
+        <i class="fa fa-angle-double-down animated" title="Scroll to first page"></i>
+      </a>
+  </div>
+</section>
+
+<section id="main_info" class="content-section light-section">
+  <div class="container main_info" >
+    <div class="row col-lg-8 col-lg-offset-2">
+      <h3>Capturing human style in chess</h3>
+
+      <canvas id="maia_bars" class="bar_plot_div"></canvas>
+      <script>draw_main_bar_plot()</script>
+
+      <p>Maia’s goal is to play the <b>human</b> move — not necessarily the best move. As a result, Maia has a more human-like style than previous engines, matching moves played by human players in online games over 50% of the time.
+
+      </p>
+    </div>
+</div>
+</section>
+
+<section id="details" class="content-section details_section">
+  <div class="content-section details_slide">
+  <div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <figure>
+        <img src="/static/assets/images/maia-diagram_transparent.png" alt="observer diagram" class="observer-diagram">
+        <figcaption>
+          During training, Maia is given a position that occurred in a real human game and tries to predict which move was made. After seeing hundreds of millions of positions, Maia accurately captures how people at different levels play chess.
+        </figcaption>
+      </figure>
+    </div>
+    <div class="col-lg-6">
+
+      <p> Maia is an AlphaZero/Leela-like deep learning framework that learns from online human games instead of self-play. Maia is trained on millions of games, and tries to predict the human move played in each position seen.</p>
+      <p>We trained 9 versions of Maia, one for each Elo milestone between 1100 and 1900. Maia 1100 was only trained on games between 1100-rated players, and so on. Each version learned from 12 million
+        human games, and learns how chess is typically played at its specific level.</p>
+      <p></p>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div class="content-section details_slide">
+  <div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+
+      <p>We measure “move-matching accuracy”, how often Maia’s predicted move is the same as the human move played in real online games.  </p>
+
+      <p>Because we trained 9 different versions of Maia, each at a targeted skill level, we can begin to algorithmically capture what kinds of mistakes players at specific skill levels make – and when people stop making them. </p>
+
+      <p>In this example, the Maias predict that people stop playing the tempting but wrong move <i>b6</i> at around 1500. </p>
+
+
+    </div>
+    <div class="col-lg-8">
+      <figure>
+        <img src="/static/assets/images/example_board.png" alt="example board" width="100%">
+          <figcaption>In this position, Maia levels 1100–1400 correctly predict that White will play the tempting but wrong
+            move
+            b6 (the move
+            played in the game). It threatens the Queen, but after …Qxc5 White’s big advantage is mostly gone. Maia levels
+            1500–1900
+            predict that, on average, players rated 1500 and above will play the correct bxa6, forcing the Queenside open to
+            decisive effect.
+          </figcaption>
+          </figure>
+          </div>
+        <!--
+        <iframe  class='widget_embed' src="https://csslab.github.io/Maia-Agreement-Visualizer"></iframe>-->
+  </div>
+  </div>
+  </div>
+</div>
+<div class="content-section details_slide">
+  <div class="container">
+    <h4><center>Maia captures human style at targeted skill levels</center></h4>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="line_plot_container">
+      <canvas id="maia_lines" class="line_plot"></canvas>
+      <script>draw_main_line_plot(maia_data, 'maia_lines')</script>
+      <noscript>
+    <h1>Javascript is required to view the plots</h1>
+    <p>You can also see the plots in our paper on <a href="https://arxiv.org/abs/2006.01855">arXiv</a> or directly in our <a href="https://github.com/CSSLab/maia-chess/tree/master/images">repo</a></p>
+</noscript>
+
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="text_column">
+        <p>We tested each Maia on 9 sets of 500,000 positions that arose in real human games, one for each rating level between 1100 and 1900. Every Maia made a prediction for every position, and we measured its resulting move-matching accuracy on each set. </p>
+        <!-- <p><b> Maia captures human style at its specified skill level</b></p> -->
+        <p>Each Maia captures human style at its targeted skill level. Lower Maias best predict moves played by lower-rated players, whereas higher Maias predict moves made by higher-rated players.</p>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="content-section details_slide">
+  <div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class='line_plot_container'>
+      <canvas id="all_lines" class="line_plot"></canvas>
+      <script>draw_main_line_plot(collected_data, 'all_lines')</script>
+      <noscript>
+    <h1>Javascript is required to view the plots</h1>
+    <p>You can also see the plots in our paper on <a href="https://arxiv.org/abs/2006.01855">arXiv</a> or directly in our <a href="https://github.com/CSSLab/maia-chess/tree/master/images">repo</a></p>
+</noscript>
+
+    </div>
+    </div>
+    <div class="col-lg-6 ">
+      <div class="text_column">
+        <p>As a comparison, we looked at how depth-limited Stockfish does on the same prediction task. We ran various depth limits, ranging from only considering the current board (D01) to letting it search 15 plies ahead (D15). Depth-limited Stockfish is the most popular engine to play against for fun (e.g. the "Play with the Computer" feature on Lichess).</p>
+          <p>We also compared against a variety of Leela chess models, ranging from the very weak 800-rated version to a 3200-rating version.</p>
+
+        <p>Stockfish and Leela models don't predict human moves as well as Maia. Equally importantly, they don't match a targeted skill level: the curves in the graph are relatively flat across a wide range of human skill levels.</p>
+
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="content-section details_slide">
+  <div class="container">
+    <h4><center>Predicting mistakes</center></h4>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class='line_plot_container'>
+        <canvas id="data_delta" class="line_plot"></canvas>
+        <script>draw_main_line_plot(data_delta, 'data_delta', true)</script>
+        <noscript>
+    <h1>Javascript is required to view the plots</h1>
+    <p>You can also see the plots in our paper on <a href="https://arxiv.org/abs/2006.01855">arXiv</a> or directly in our <a href="https://github.com/CSSLab/maia-chess/tree/master/images">repo</a></p>
+</noscript>
+
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="text_column">
+          <p> Maia is particularly good at predicting human mistakes. The move-matching accuracy of any model increases with the quality of the move, since good moves are easier to predict. But even when players make horrific blunders, Maia correctly predicts the exact blunder they make around 25% of the time. This ability to understand how and when people are likely to make mistakes can make Maia a very useful learning tool.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="content-section details_slide">
+  <div class="container">
+    <h4>
+      <center>Personalizing to Individual Players</center>
+    </h4>
+    <div class="row">
+      <div class="col-lg-6">
+        <figure>
+          <img src="/static/assets/images/maia_transfer_val_accs.svg" alt="Transfer Maia" width="100%">
+          <figcaption>By targeting a specific player we can get even higher move prediction accuracy compared to Maias targeting just the player's rating.
+          </figcaption>
+        </figure>
+      </div>
+      <div class="col-lg-6">
+        <div class="text_column">
+          <p>In current work, we are pushing the modeling of human play to the next level: can we predict the moves a <i>particular</i> human player would make? It turns out that personalizing Maia gives us our biggest performance gains. We achieve these results by fine-tuning Maia: starting with a base Maia, say Maia 1900, we update the model by continuing training on an individual player’s games. This plot shows that personalized Maias achieve up to 65% accuracy at predicting particular players' moves.</p>
+          <p>The paper for this work is available as a preprint <a href="https://arxiv.org/abs/2008.10086" title = "Link to ArXiv copy of paper">here</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="content-section details_slide">
+  <div class="container">
+    <h4><center>Play Maia and more</center></h4>
+    <!-- <div class="col-lg-10 "> -->
+      <p>You can play against Maia yourself on Lichess! You can play <a href="https://lichess.org/@/maia1">Maia 1100</a>, <a href="https://lichess.org/@/maia5">Maia 1500</a>, and <a href="https://lichess.org/@/maia9">Maia 1900</a>.
+
+
+        <p>Maia is an ongoing research project using chess as a case study for how to design better human-AI interactions. We hope Maia becomes a useful learning tool and is fun to play against. Our research goals include personalizing Maia to individual players, characterizing the kinds of mistakes that are made at each rating level, running Maia on your games and spotting repeated, predictable mistakes, and more.</p>
+
+
+          <p>This is work in progress and we’d love to hear what you think. Please let us know
+    if you have any feedback or questions by <a href="mailto:maiachess@cs.toronto.edu">email</a> or <a href="https://twitter.com/maiachess">Twitter</a>.</p>
+      <!-- </div> -->
+    <!-- <div class="row">
+      <div class="col-lg-4 col-lg-offset-2">
+        <h4>Our models are on Lichess</h4>
+        <table class="table models_table">
+          <tr>
+            <th>Name</th>
+            <th>Trained Rating</th>
+          </tr>
+          <tr>
+            <td class="model_name"><a href="https://lichess.org/@/maia1">maia1</a></td>
+            <td class="model_rating">1100</td>
+          </tr>
+          <tr>
+            <td class="model_name"><a href="https://lichess.org/@/maia5">maia5</a></td>
+            <td class="model_rating">1500</td>
+          </tr>
+          <tr>
+            <td class="model_name"><a href="https://lichess.org/@/maia9">maia9</a></td>
+            <td class="model_rating">1900</td>
+          </tr>
+        </table>
+      </div>
+    <div class="col-lg-6">
+
+      <h4>Please get in touch</h4>
+
+    </div> -->
+    </div>
+    <!-- <div class="row closing-remark">
+
+    </div> -->
+
+  </div>
+
+</div>
+</div>
+</section>
+
+<section id="paper" class="content-section dark-section">
+  <div class="container">
+    <div class="row col-lg-9 col-lg-offset-2 left-justify-section">
+      <h2>paper</h2>
+
+        <p> Read the full <a href="https://arxiv.org/abs/2006.01855">research paper on Maia </a>, which was published in the <i>2020 ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (KDD 2020)</i>.</p>
+
+        <p>You can read a blog post about Maia <a href="http://csslab.cs.toronto.edu/blog/2020/08/24/maia_chess_kdd/">from the Computational Social Science Lab</a> or <a href="https://www.microsoft.com/en-us/research/blog/the-human-side-of-ai-for-chess">Microsoft Research</a>.</p>
+
+        <p> We are going to be releasing beta versions of learning tools, teaching aids, and experiments based on Maia (analyses of your games, personalized puzzles, Turing tests, etc.). If you want to be the first to know, you can sign up for our email list <a href="https://forms.gle/jaQfzSGmaeMcu2UA7" title="Email signup list">here</a>.</p>
+
+        <p> If you want to see some more examples of Maia's predictions we have a tool <a href="https://csslab.github.io/Maia-Agreement-Visualizer/" title="Link to interactive prediction visualizer">here</a> to see where the different models disagree.</p>
+
+        <p>The code for training Maia can be found on our <a href="https://github.com/CSSLab/maia-chess">Github Repo</a>.
+
+      <h4>Abstract</h4>
+      <p class = 'abstract'>
+
+      As artificial intelligence becomes increasingly intelligent--in some cases, achieving superhuman performance--there is growing potential for humans to learn from and collaborate with algorithms. However, the ways in which AI systems approach problems are often different from the ways people do, and thus may be uninterpretable and hard to learn from. A crucial step in bridging this gap between human and artificial intelligence is modeling the granular actions that constitute human behavior, rather than simply matching aggregate human performance.
+
+      We pursue this goal in a model system with a long history in artificial intelligence: chess. The aggregate performance of a chess player unfolds as they make decisions over the course of a game. The hundreds of millions of games played online by players at every skill level form a rich source of data in which these decisions, and their exact context, are recorded in minute detail. Applying existing chess engines to this data, including an open-source implementation of AlphaZero, we find that they do not predict human moves well.
+
+      We develop and introduce Maia, a customized version of Alpha-Zero trained on human chess games, that predicts human moves at a much higher accuracy than existing engines, and can achieve maximum accuracy when predicting decisions made by players at a specific skill level in a tuneable way. For a dual task of predicting whether a human will make a large mistake on the next move, we develop a deep neural network that significantly outperforms competitive baselines. Taken together, our results suggest that there is substantial promise in designing artificial intelligence systems with human collaboration in mind by first accurately modeling granular human decision-making.
+      </p>
+<!--<h3>BibTex</h3>
+<code>@inproceedings{mcilroyyoung2020maia,
+title={Aligning Superhuman AI with Human Behavior: Chess as a Model System},
+author={McIlroy-Young, Reid and Sen, Siddhartha and Kleinberg, Jon and Anderson, Ashton},
+year={2020},
+booktitle={Proceedings of the 25th ACM SIGKDD international conference on Knowledge discovery and data mining}
+}</code>
+-->
+    </div>
+  </div>
+</section>
+
+<section id="data" class="content-section light-section">
+  <div class="container">
+    <div class="row col-lg-8 col-lg-offset-2 left-justify-section">
+      <h2>Data</h2>
+      <p> All our data is from the wonderful archive at <a href="https://database.lichess.org/">database.lichess.org</a>. We converted the raw PGN raw data dumps into CSV, and have made the CSV we used for testing available at <a href="http://csslab.cs.toronto.edu/datasets/#maia_kdd">csslab.cs.toronto.edu/datasets</a>.</p>
+      <!-- <p>If you want the full dataset we used for training the models please get in touch</p> -->
+    </div>
+  </div>
+</section>
+
+<section id="team" class="content-section">
+  <div class="container">
+    <div class="row col-lg-10 col-lg-offset-1">
+      <h2>Team</h2>
+      
+<div class="people-list animate_hidden">
+    <div class="person">
+                <div class="person-line">
+                <img class="img-circle img-responsive img-center person-image" src="/assets/images/people/reid.jpg" alt = "Picture of Reid McIlroy-Young">
+                </div>
+
+                <div class="person-line">
+                <a href="https://reidmcy.com">Reid McIlroy-Young</a>
+                </div>
+                <div class="person-line">
+                <p>University of Toronto, Computer Science</p>
+                </div>
+
+                <div class="person-line"><div class="person-link">
+                        <a href="https://reidmcy.com">
+                            <i class="fas fa-external-link-alt" title="Reid McIlroy-Young website link"></i>
+                        </a>
+                    </div><div class="person-link">
+                    <a href="https://www.twitter.com/reidmcy">
+                        <i class="fab fa-twitter" title="Reid McIlroy-Young Twitter link"></i>
+                    </a>
+                    </div><div class="person-link">
+                        <a href="https://github.com/reidmcy">
+                            <i class="fab fa-github" title="Reid McIlroy-Young Github link"></i>
+                        </a>
+                    </div></div>
+            </h3>
+
+        </div><div class="person">
+                <div class="person-line">
+                <img class="img-circle img-responsive img-center person-image" src="/assets/images/people/ashton.jpeg" alt = "Picture of Ashton Anderson">
+                </div>
+
+                <div class="person-line">
+                <a href="http://www.cs.toronto.edu/~ashton/">Ashton Anderson</a>
+                </div>
+                <div class="person-line">
+                <p>University of Toronto, Computer Science</p>
+                </div>
+
+                <div class="person-line"><div class="person-link">
+                        <a href="http://www.cs.toronto.edu/~ashton/">
+                            <i class="fas fa-external-link-alt" title="Ashton Anderson website link"></i>
+                        </a>
+                    </div><div class="person-link">
+                    <a href="https://www.twitter.com/ashton1anderson">
+                        <i class="fab fa-twitter" title="Ashton Anderson Twitter link"></i>
+                    </a>
+                    </div><div class="person-link">
+                        <a href="https://github.com/ashtonanderson">
+                            <i class="fab fa-github" title="Ashton Anderson Github link"></i>
+                        </a>
+                    </div></div>
+            </h3>
+
+        </div><div class="person">
+                <div class="person-line">
+                <img class="img-circle img-responsive img-center person-image" src="/assets/images/people/sid.jpeg" alt = "Picture of Siddhartha Sen">
+                </div>
+
+                <div class="person-line">
+                <a href="http://sidsen.org">Siddhartha Sen</a>
+                </div>
+                <div class="person-line">
+                <p>Microsoft Research</p>
+                </div>
+
+                <div class="person-line"><div class="person-link">
+                        <a href="http://sidsen.org">
+                            <i class="fas fa-external-link-alt" title="Siddhartha Sen website link"></i>
+                        </a>
+                    </div><div class="person-link">
+                        <a href="https://github.com/sidsen">
+                            <i class="fab fa-github" title="Siddhartha Sen Github link"></i>
+                        </a>
+                    </div></div>
+            </h3>
+
+        </div><div class="person">
+                <div class="person-line">
+                <img class="img-circle img-responsive img-center person-image" src="/assets/images/people/jon.jpg" alt = "Picture of Jon Kleinberg">
+                </div>
+
+                <div class="person-line">
+                <a href="http://www.cs.cornell.edu/home/kleinber">Jon Kleinberg</a>
+                </div>
+                <div class="person-line">
+                <p>Cornell University, Computer Science</p>
+                </div>
+
+                <div class="person-line"><div class="person-link">
+                        <a href="http://www.cs.cornell.edu/home/kleinber">
+                            <i class="fas fa-external-link-alt" title="Jon Kleinberg website link"></i>
+                        </a>
+                    </div></div>
+            </h3>
+
+        </div><div class="person">
+                <div class="person-line">
+                <img class="img-circle img-responsive img-center person-image" src="/assets/images/people/russell.jpg" alt = "Picture of Russell Wang">
+                </div>
+
+                <div class="person-line">
+                <a href=" https://github.com/rwang97">Russell Wang</a>
+                </div>
+                <div class="person-line">
+                <p>University of Toronto, Computer Science</p>
+                </div>
+
+                <div class="person-line"><div class="person-link">
+                    <a href="https://www.twitter.com/rwang97">
+                        <i class="fab fa-twitter" title="Russell Wang Twitter link"></i>
+                    </a>
+                    </div><div class="person-link">
+                        <a href="https://github.com/rwang97">
+                            <i class="fab fa-github" title="Russell Wang Github link"></i>
+                        </a>
+                    </div></div>
+            </h3>
+
+        </div></div>
+
+    </div>
+  </div>
+</section>
+
+<section id="acknowledgments" class="content-section light-section acks">
+  <div class="container">
+    <div class="col-lg-8 col-lg-offset-2  left-justify-section">
+      <h2>Acknowledgments</h2>
+      <p>Many thanks to Lichess.org for providing the human games that we trained on and hosting our Maia models that you can play against. Ashton Anderson was supported in part by an NSERC grant, a Microsoft Research gift, and a CFI grant. Jon Kleinberg was supported in part by a Simons Investigator Award, a Vannevar Bush Faculty Fellowship, a MURI grant, and a MacArthur Foundation grant.</p>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+    <div class="footer-container">
+        <p>
+            Designed with help from <a href="https://www.cs.toronto.edu/~glifchits/">George Lifchits</a>
+        </p>
+        <p>
+            You can get in touch with us by email <a href="mailto:maiachess@cs.toronto.edu">maiachess@cs.toronto.edu</a> or on Twitter <a href="https://twitter.com/maiachess">@maiachess</a>
+        </p>
+    </div>
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+@import "../../styles/foundation/base";
+
+.header-container {
+  @extend .row;
+  background-color: $lower-contrast;
+  color: $high-contrast;
+  justify-content: space-between;
+
+  padding-left: 10vw;
+  padding-right: 8vw;
+
+  h2 {
+    font-weight: 400;
+  }
+
+  p {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    @extend .highlight;
+  }
+
+  a {
+    text-decoration: none !important;
+    padding: 10px;
+
+    @extend .highlight;
+  }
+
+  @include mobile {
+    padding-left: 4vw;
+    padding-right: 4vw;
+  }
+}
+
+.header-menu {
+  @extend .row;
+
+  span {
+    font-weight: 400;
+    color: $high-contrast;
+  }
+}
+
+.auth-container {
+  position: relative;
+  display: inline-block;
+  min-width: 150px;
+
+  button {
+    text-decoration: none !important;
+    padding: 10px;
+    background-color: $lower-contrast;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+    width: 100%;
+
+    @extend .highlight;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+}
+
+.dropdown-menu {
+  display: none;
+
+  color: $highest-contrast;
+  position: absolute;
+  z-index: 50;
+  width: 100%;
+  background-color: $lower-contrast;
+  border-radius: 2px;
+  transition: 0.2s;
+}
+
+.auth-container:hover .dropdown-menu {
+  @extend .col;
+}
+
+.dropdown-menu:hover {
+  @extend .col;
+}
+
+.dropdown-menu-closed {
+  display: none !important;
+  @extend .dropdown-menu;
+  @extend .col;
+}
+
+.dropdown-menu-open {
+  @extend .dropdown-menu;
+  @extend .col;
+}

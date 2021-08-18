@@ -1,0 +1,38 @@
+@import "./../../styles/foundation/base";
+
+.game-result-container {
+  p {
+    font-size: 16px !important;
+    font-weight: 300;
+  }
+
+  h4 {
+    margin: 0px;
+  }
+
+  .row {
+    @extend .row;
+    text-align: left;
+    justify-content: left;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  span {
+    font-weight: 500;
+  }
+
+  .circle {
+    font-size: 22px;
+    line-height: 0.7;
+    font-weight: 900;
+    color: white;
+  }
+
+  @extend .col;
+  @extend .shadowed;
+  @extend .bordered;
+
+  background-color: $lower-contrast;
+  padding: 4px;
+}

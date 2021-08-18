@@ -1,0 +1,28 @@
+$bg-color: #1b1e1e;
+$shadow-color: #00000040;
+$lowest-contrast: #1b1e1e;
+$lower-contrast: #212525;
+$low-contrast: #4c5458;
+$high-contrast: #93b9c9;
+$higher-contrast: #cfe4e4;
+$highest-contrast: #f7fcfc;
+
+$survey-in-progress: #bf811d;
+$survey-feedback-correct: #629924;
+$survey-feedback-incorrect: #c23;
+$survey-feedback-current: #3692e7;
+
+.highlight {
+  transition: 0.18s;
+  color: $higher-contrast;
+  font-weight: 300;
+
+  &:hover {
+    color: $highest-contrast;
+    cursor: pointer;
+  }
+}
+
+a {
+  @extend .highlight;
+}
