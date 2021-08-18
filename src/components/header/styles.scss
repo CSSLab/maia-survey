@@ -84,6 +84,12 @@
   @extend .col;
 }
 
+.dropdown-menu-closed {
+  display: none !important;
+  @extend .dropdown-menu;
+  @extend .col;
+}
+
 .dropdown-menu-open {
   @extend .dropdown-menu;
   @extend .col;
