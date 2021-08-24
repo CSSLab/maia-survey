@@ -68,7 +68,7 @@ const Turing = () => {
   const { fen, lastMove, check } = currentState;
   return (
     <div className="container">
-      <div className="row">
+      <div className="base-container">
         <div className="submission-container">
           <div>
             {game.feedback ? (
@@ -190,7 +190,7 @@ const Turing = () => {
             setCurrentGameIndex={setCurrentGameIndex}
           />
         </div>
-        <div className="bordered">
+        <div className="control-container">
           <MovesContainer
             moves={game.moves}
             setSelectedIndex={setPlyIndex}

@@ -2,14 +2,41 @@
 
 $selected-btn-color: rgba($lowest-contrast, 0.6);
 
+.base-container {
+  @extend .row;
+
+  @include mobile {
+    flex-direction: column;
+    margin-bottom: 10vh;
+  }
+}
+
+.control-container {
+  @extend .bordered;
+
+  @include mobile {
+    width: 95vw;
+  }
+}
+
 .submission-group {
   @extend .row;
   @extend .bordered;
   background-color: $lower-contrast;
-  min-width: 200px;
+  width: 100%;
 }
 
 .submission-container {
+  @include mobile {
+    order: 1;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  @include tablet {
+    width: 150px;
+  }
+
   p {
     padding: 0;
     margin: 0;
