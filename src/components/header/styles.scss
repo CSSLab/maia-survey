@@ -47,6 +47,12 @@
   display: inline-block;
   min-width: 150px;
 
+  @include mobile {
+    min-width: 100px;
+
+    font-size: 12px;
+  }
+
   button {
     text-decoration: none !important;
     padding: 10px;
