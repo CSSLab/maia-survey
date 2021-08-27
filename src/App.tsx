@@ -12,7 +12,7 @@ import footerContent from "./content/footer";
 
 function App() {
   const authController = useAuthController();
-  const [, [login]] = authController;
+  const [userName, [login]] = authController;
 
   useEffect(() => {
     if (localStorage.getItem(JWT_AUTH_STATUS) !== AUTH_STATUS_LOGGED_OUT)
@@ -27,9 +27,11 @@ function App() {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/turing" exact>
-            <Turing />
-          </Route>
+          {userName && (
+            <Route path="/turing" exact>
+              <Turing />
+            </Route>
+          )}
         </Switch>
         <Footer>{footerContent}</Footer>
       </div>

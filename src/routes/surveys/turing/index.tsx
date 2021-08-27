@@ -59,8 +59,9 @@ const Turing = () => {
     [correctCount, totalCount],
   ] = gamesController;
 
+  // TODO: Make a cool loading screen
   if (!game) {
-    return <></>;
+    return <>LOADING...</>;
   }
 
   const currentState = game.gameStates[currentPlyIndex] ?? {};
