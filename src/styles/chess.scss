@@ -31,7 +31,8 @@
   justify-content: "flex-start";
   display: flex;
   @include mobile {
-    width: 40vw;
+    width: auto;
+    white-space: nowrap;
   }
 
   &:hover {
@@ -46,6 +47,12 @@
 .index-container {
   margin: 3px;
   width: 35px;
+
+  @include mobile {
+    width: auto;
+    padding-right: 4px;
+    padding-left: 10px;
+  }
 }
 
 .move-container {
@@ -66,6 +73,20 @@
   font-size: 19px !important;
   font-weight: 400;
   width: 100%;
+
+  @include mobile {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: auto !important;
+  }
+}
+
+.moves {
+  @extend .col;
+
+  @include mobile {
+    flex-direction: row !important;
+  }
 }
 
 ::-webkit-scrollbar {

@@ -165,28 +165,29 @@ export const useBoardController: UseBoardController = (
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case "Left":
-        case "ArrowLeft":
-          if (getPreviousPly) getPreviousPly();
-          break;
-        case "Right":
-        case "ArrowRight":
-          if (getNextPly) getNextPly();
-          break;
-        case "Down":
-        case "ArrowDown":
-          if (getLastPly) getLastPly();
-          break;
-        case "Up":
-        case "ArrowUp":
-          if (getFirstPly) getFirstPly();
-          break;
-        case "f":
-          changeBoardOrientation();
-          break;
-        default:
-      }
+      if (e.target === document.getElementsByTagName("BODY")[0])
+        switch (e.key) {
+          case "Left":
+          case "ArrowLeft":
+            if (getPreviousPly) getPreviousPly();
+            break;
+          case "Right":
+          case "ArrowRight":
+            if (getNextPly) getNextPly();
+            break;
+          case "Down":
+          case "ArrowDown":
+            if (getLastPly) getLastPly();
+            break;
+          case "Up":
+          case "ArrowUp":
+            if (getFirstPly) getFirstPly();
+            break;
+          case "f":
+            changeBoardOrientation();
+            break;
+          default:
+        }
     };
 
     window.addEventListener("keydown", onKeyDown);

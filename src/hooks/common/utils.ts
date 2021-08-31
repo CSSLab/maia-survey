@@ -17,7 +17,7 @@ export const useInnerWidth = () => {
 export const useMobile = () => {
   const width = useInnerWidth();
 
-  return useMemo(() => width <= 800, [width]);
+  return useMemo(() => width <= 700, [width]);
 };
 
 export const useLocalStorage = <T>(

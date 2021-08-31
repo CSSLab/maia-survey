@@ -26,6 +26,16 @@ $selected-btn-color: rgba($lowest-contrast, 0.6);
   width: 100%;
 }
 
+.submission-title {
+  @extend .row;
+
+  @include mobile {
+    h4 {
+      font-size: 21px;
+    }
+  }
+}
+
 .submission-container {
   @include mobile {
     order: 1;
@@ -116,14 +126,30 @@ $selected-btn-color: rgba($lowest-contrast, 0.6);
     background-color: $lower-contrast;
     color: $high-contrast;
   }
+}
 
-  .stats-container {
-    @extend .bordered;
-    @extend .shadowed;
-    background-color: $lower-contrast;
+.stats-container {
+  @extend .bordered;
+  @extend .shadowed;
+  @extend .col;
+  background-color: $lower-contrast;
+  padding: 6px;
+
+  h4 {
+    line-height: 1em;
+    margin: 4px;
+  }
+
+  @include mobile {
+    width: 94vw;
+    margin-top: 1vh;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 50px;
 
     h4 {
-      line-height: 1em;
+      font-size: 20px;
+      margin: 0 !important;
     }
   }
 }

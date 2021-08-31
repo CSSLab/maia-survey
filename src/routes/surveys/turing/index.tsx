@@ -1,9 +1,9 @@
 /* eslint-disable no-nested-ternary */
-import React from "react";
+import React, { useMemo } from "react";
 import Chessground from "@react-chess/chessground";
 
 import "./styles.scss";
-import { UseModalControllerHook, useTuring } from "../../../hooks";
+import { useMobile, UseModalControllerHook, useTuring } from "../../../hooks";
 import { GameResult, TuringSubmissionFeedback } from "../../../types";
 import {
   BoardController,
@@ -65,6 +65,33 @@ const Turing: React.FC<Props> = ({ modalController }: Props) => {
     [correctCount, totalCount],
   ] = gamesController;
 
+  const mobile = useMobile();
+
+  const statsContainer = useMemo(
+    () => (
+      <div className="stats-container">
+        <div className="row">
+          <h4>
+            <span>
+              {correctCount}/{totalCount}
+            </span>{" "}
+            {totalCount > 0
+              ? ((correctCount / totalCount) * 100).toFixed(2)
+              : 0}
+            %
+          </h4>
+        </div>
+        <div className="row">
+          <h4>
+            Rank{" "}
+            <span>~{localStorage.getItem(TURING_STATS_RANK) ?? "2000"}</span>
+          </h4>
+        </div>
+      </div>
+    ),
+    [correctCount, totalCount]
+  );
+
   // TODO: Make a cool loading screen
   if (!game) {
     return <>LOADING...</>;
@@ -76,6 +103,7 @@ const Turing: React.FC<Props> = ({ modalController }: Props) => {
   return (
     <div className="container">
       <div className="base-container">
+        {mobile && statsContainer}
         <div className="submission-container">
           <div>
             {game.feedback ? (
@@ -97,7 +125,7 @@ const Turing: React.FC<Props> = ({ modalController }: Props) => {
               </>
             ) : (
               <>
-                <div className="row">
+                <div className="submission-title">
                   <h4>Choose the Bot</h4>
                 </div>
                 <div className="submission-group">
@@ -156,27 +184,7 @@ const Turing: React.FC<Props> = ({ modalController }: Props) => {
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a onClick={() => setShowModal(true)}>view instructions?</a>
           </div>
-          <div className="col stats-container">
-            <div className="row">
-              <h4 style={{ marginBottom: 6 }}>
-                <span>
-                  {correctCount}/{totalCount}
-                </span>{" "}
-                {totalCount > 0
-                  ? ((correctCount / totalCount) * 100).toFixed(2)
-                  : 0}
-                %
-              </h4>
-            </div>
-            <div className="row">
-              <h4 style={{ marginTop: 6 }}>
-                Rank{" "}
-                <span>
-                  ~{localStorage.getItem(TURING_STATS_RANK) ?? "2000"}
-                </span>
-              </h4>
-            </div>
-          </div>
+          {!mobile && statsContainer}
         </div>
         <div className="board-container">
           <Chessground
@@ -199,12 +207,25 @@ const Turing: React.FC<Props> = ({ modalController }: Props) => {
           />
         </div>
         <div className="control-container">
-          <MovesContainer
-            moves={game.moves}
-            setSelectedIndex={setPlyIndex}
-            selectedIndex={currentPlyIndex}
-          />
-          <BoardController boardController={boardController} />
+          {mobile ? (
+            <>
+              <BoardController boardController={boardController} />
+              <MovesContainer
+                moves={game.moves}
+                setSelectedIndex={setPlyIndex}
+                selectedIndex={currentPlyIndex}
+              />
+            </>
+          ) : (
+            <>
+              <MovesContainer
+                moves={game.moves}
+                setSelectedIndex={setPlyIndex}
+                selectedIndex={currentPlyIndex}
+              />
+              <BoardController boardController={boardController} />
+            </>
+          )}
         </div>
       </div>
     </div>

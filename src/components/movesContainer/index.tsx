@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { Move, Moves } from "../../types";
 
 interface Props {
@@ -17,40 +17,53 @@ const MoveContainer = ({
   index: number;
   setSelectedIndex: (index: number) => void;
   selectedIndex: number;
-}) => (
-  <div className="move-container">
-    <div className="index-container">
-      <span>{index + 1}</span>
+}) => {
+  const scroll = useCallback(
+    (ref: HTMLDivElement) => {
+      const selected =
+        index * 2 + 1 === selectedIndex || index * 2 + 2 === selectedIndex;
+      if (selected && ref != null) {
+        ref.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    },
+    [index, selectedIndex]
+  );
+
+  return (
+    <div className="move-container" ref={scroll}>
+      <div className="index-container">
+        <span>{index + 1}</span>
+      </div>
+      {whitePly && (
+        <div
+          className={`ply-container ${
+            index * 2 + 1 === selectedIndex ? "selected-ply" : ""
+          }`}
+          key={index * 2}
+          onClick={() => setSelectedIndex(index * 2 + 1)}
+        >
+          {whitePly}
+        </div>
+      )}
+      {blackPly && (
+        <div
+          className={`ply-container ${
+            index * 2 + 2 === selectedIndex ? "selected-ply" : ""
+          }`}
+          key={index * 2 + 1}
+          onClick={() => setSelectedIndex(index * 2 + 2)}
+        >
+          {blackPly}
+        </div>
+      )}
     </div>
-    {whitePly && (
-      <div
-        className={`ply-container ${
-          index * 2 + 1 === selectedIndex ? "selected-ply" : ""
-        }`}
-        key={index * 2}
-        onClick={() => setSelectedIndex(index * 2 + 1)}
-      >
-        {whitePly}
-      </div>
-    )}
-    {blackPly && (
-      <div
-        className={`ply-container ${
-          index * 2 + 2 === selectedIndex ? "selected-ply" : ""
-        }`}
-        key={index * 2 + 1}
-        onClick={() => setSelectedIndex(index * 2 + 2)}
-      >
-        {blackPly}
-      </div>
-    )}
-  </div>
-);
+  );
+};
 
 const MovesContainer = ({ moves, setSelectedIndex, selectedIndex }: Props) => {
   return (
     <div className="moves-container">
-      <div className="col">
+      <div className="moves">
         {moves.map((move: Move, index: number) => (
           <MoveContainer
             move={move}
