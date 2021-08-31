@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 export const SHOW_TURING_INSTRUCTIONS = "preferences:show_turing_instructions";
 
@@ -12,6 +12,12 @@ export const useInnerWidth = () => {
   }, []);
 
   return width;
+};
+
+export const useMobile = () => {
+  const width = useInnerWidth();
+
+  return useMemo(() => width <= 800, [width]);
 };
 
 export const useLocalStorage = <T>(
