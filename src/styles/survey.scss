@@ -45,6 +45,13 @@ $selected-btn-color: rgba($lowest-contrast, 0.6);
     text-align: left;
   }
 
+  a {
+    font-size: 12px;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   @extend .col;
   @extend .stretched;
   background-color: $lowest-contrast;

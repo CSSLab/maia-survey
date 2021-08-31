@@ -60,6 +60,8 @@ export const authenticate = async () => {
 };
 
 export const getEncodedAccessToken = async (): Promise<string> => {
+  const userId = localStorage.getItem(JWT_USER_ID);
+  if (!userId) await register();
   const expirationTime = localStorage.getItem(JWT_EXPIRATION_TIME);
   if (!expirationTime || Date.now() > parseInt(expirationTime, 10)) {
     await authenticate();

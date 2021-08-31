@@ -5,3 +5,5 @@ export { default as BoardController } from "./boardController";
 export { default as GameResultContainer } from "./gameResultContainer";
 export { default as Footer } from "./footer";
 export { default as MovesContainer } from "./movesContainer";
+export { default as ModalContainer } from "./modalContainer";
+export * from "./turingInstructions";

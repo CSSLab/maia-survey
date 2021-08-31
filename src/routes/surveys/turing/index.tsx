@@ -3,7 +3,7 @@ import React from "react";
 import Chessground from "@react-chess/chessground";
 
 import "./styles.scss";
-import { useTuring } from "../../../hooks";
+import { UseModalControllerHook, useTuring } from "../../../hooks";
 import { GameResult, TuringSubmissionFeedback } from "../../../types";
 import {
   BoardController,
@@ -41,13 +41,19 @@ const turingSubmissionToGameResult = ({
   };
 };
 
-const Turing = () => {
+interface Props {
+  modalController: ReturnType<UseModalControllerHook>;
+}
+
+const Turing: React.FC<Props> = ({ modalController }: Props) => {
   const [
     gamesController,
     boardController,
     turingSubmissionController,
     fetchGame,
   ] = useTuring();
+
+  const [[, setShowModal]] = modalController;
 
   const [[currentPlyIndex, setPlyIndex], , [orientation]] = boardController;
   const [[guess, setGuess, submitGuess], [submissionText, setSubmissionText]] =
@@ -118,7 +124,6 @@ const Turing = () => {
                 </div>
               </>
             )}
-
             <div className="submission-group">
               <button
                 className="submission-button"
@@ -148,6 +153,8 @@ const Turing = () => {
                 />
               </div>
             )}
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a onClick={() => setShowModal(true)}>view instructions?</a>
           </div>
           <div className="col stats-container">
             <div className="row">
