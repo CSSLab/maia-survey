@@ -17,8 +17,8 @@ import { buildUrl } from "../../api/common/utils";
 
 export type UseAuthControllerHook = () => [
   string | null,
-  [VoidFunction, VoidFunction],
-  VoidFunction
+  [() => Promise<void>, () => Promise<void>],
+  () => Promise<void>
 ];
 
 const useAuthController: UseAuthControllerHook = () => {
