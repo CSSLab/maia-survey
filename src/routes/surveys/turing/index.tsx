@@ -111,13 +111,19 @@ const Turing: React.FC<Props> = ({ modalController }: Props) => {
                 <div className="row">
                   <h3 style={{ marginBottom: 2 }}>
                     Guess{" "}
-                    {game.feedback?.guessCorrect ? "correct" : "incorrect"}
+                    {game.feedback?.guessCorrect ? (
+                      <span className="correct-label">correct</span>
+                    ) : (
+                      <span className="incorrect-label">incorrect</span>
+                    )}
+                    {", "}
+                    <span>
+                      {game.feedback?.whiteIsBot ? "White" : "Black"}
+                    </span>{" "}
+                    was the bot
                   </h3>
                 </div>
-                <p>
-                  <span>{game.feedback?.whiteIsBot ? "White" : "Black"}</span>{" "}
-                  was the bot
-                </p>
+
                 <GameResultContainer
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   {...turingSubmissionToGameResult(game.feedback)}

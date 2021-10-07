@@ -39,7 +39,11 @@ const Header = ({
       </h2>
       <div className="auth-container">
         <button ref={buttonRef} onClick={toggleMenu}>
-          =
+          <svg viewBox="0 0 100 50" width="20" height="20" fill="#cfe4e4">
+            <rect width="100" height="7" rx="5" />
+            <rect y="30" width="100" height="7" rx="5" />
+            <rect y="60" width="100" height="7" rx="5" />
+          </svg>
         </button>
         <div
           className={showMenu ? "dropdown-menu-open" : "dropdown-menu-closed"}
