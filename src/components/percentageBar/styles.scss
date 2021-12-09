@@ -1,0 +1,27 @@
+@import "../../styles/foundation/base";
+
+.bar-container {
+  @extend .shadowed;
+  display: flex;
+  align-items: center;
+  background-color: $lower-contrast;
+  border-radius: 1.5px;
+  flex-direction: row;
+  max-width: inherit;
+  flex: 1;
+  position: relative;
+}
+
+.bar-content-container {
+  flex-direction: inherit;
+
+  transition: 0.4s ease-in-out;
+  transition-delay: 0.1s;
+}
+
+.bar-content {
+  display: flex;
+  width: 100%;
+  border-radius: 2px;
+  height: 100%;
+}

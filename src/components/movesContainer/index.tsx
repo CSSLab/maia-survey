@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback } from "react";
 import { Move, Moves } from "../../types";
 
 interface Props {
   moves: Moves;
   setSelectedIndex: (index: number) => void;
   selectedIndex: number;
+  mobile?: boolean;
 }
 
 const MoveContainer = ({
@@ -60,10 +61,28 @@ const MoveContainer = ({
   );
 };
 
-const MovesContainer = ({ moves, setSelectedIndex, selectedIndex }: Props) => {
+const MovesContainer: React.FC<Props> = ({
+  moves,
+  setSelectedIndex,
+  selectedIndex,
+  mobile,
+}: Props) => {
   return (
-    <div className="moves-container">
-      <div className="moves">
+    <div
+      className="moves-container"
+      style={
+        mobile
+          ? {
+              overflowX: "scroll",
+              overflowY: "hidden",
+              height: "auto",
+              fontSize: "14px",
+              flexDirection: "row",
+            }
+          : {}
+      }
+    >
+      <div className="moves" style={mobile ? { flexDirection: "row" } : {}}>
         {moves.map((move: Move, index: number) => (
           <MoveContainer
             move={move}
@@ -77,6 +96,10 @@ const MovesContainer = ({ moves, setSelectedIndex, selectedIndex }: Props) => {
       </div>
     </div>
   );
+};
+
+MovesContainer.defaultProps = {
+  mobile: false,
 };
 
 export default MovesContainer;

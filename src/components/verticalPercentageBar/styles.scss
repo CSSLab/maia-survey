@@ -1,0 +1,30 @@
+@import "../../styles/foundation/base";
+
+.bar-container-vertical {
+  @extend .shadowed;
+  display: flex;
+  background-color: $lower-contrast;
+  border-radius: 1.5px;
+  flex-direction: row;
+  max-width: inherit;
+  flex: 1;
+  position: relative;
+  flex-direction: column;
+  max-height: inherit;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.bar-content-container {
+  flex-direction: inherit;
+
+  transition: 0.4s ease-in-out;
+  transition-delay: 0.1s;
+}
+
+.bar-content {
+  display: flex;
+  width: 100%;
+  border-radius: 2px;
+  height: 100%;
+}

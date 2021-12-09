@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { MappedMove } from "../../types";
 
 export const SHOW_TURING_INSTRUCTIONS = "preferences:show_turing_instructions";
 
@@ -63,3 +64,6 @@ export const useModalController: UseModalControllerHook = (key: string) => {
     [showModalPersistent, setShowModalPersistent],
   ];
 };
+
+export const isGoodMove = (moveData: MappedMove) =>
+  moveData.maiaEval > 0.3 && moveData.stockfishEval > -0.1;

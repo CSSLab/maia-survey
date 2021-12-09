@@ -66,6 +66,7 @@
   @extend .shadowed;
   background-color: $lower-contrast;
   height: $base-height;
+  height: 250px;
   max-height: $base-width;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -122,6 +123,7 @@
     @extend .base-button;
     padding: 0px 14px 2px 14px;
     font-size: 22px;
+    display: table-cell !important;
 
     @include mobile {
       font-size: 22px;

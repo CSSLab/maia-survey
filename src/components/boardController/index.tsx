@@ -27,7 +27,9 @@ const BoardController = ({
   return (
     <>
       <div className="button-group">
-        <button onClick={changeBoardOrientation}>{FlipIcon}</button>
+        <button onClick={changeBoardOrientation as VoidFunction}>
+          {FlipIcon}
+        </button>
         <button onClick={getFirst ?? (() => {})} disabled={getFirst === null}>
           &#8249;&#8249;&#8249;
         </button>
