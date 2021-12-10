@@ -4,7 +4,7 @@ import { AUTH_STATUS_LOGGED_OUT, JWT_AUTH_STATUS } from "./api";
 import "./App.css";
 import { Footer, Header, TuringInstructions } from "./components";
 import useAuthController from "./hooks/auth";
-import { Turing, Home } from "./routes";
+import { Turing, Home, Beta, Analysis } from "./routes";
 
 import "./styles/foundation/_base.scss";
 
@@ -37,6 +37,12 @@ function App() {
               />
             )}
             <Turing modalController={turingModalController} />
+          </Route>
+          <Route path="/beta" exact>
+            <Beta />
+          </Route>
+          <Route path="/analysis" exact>
+            <Analysis />
           </Route>
         </Switch>
         <Footer>{footerContent}</Footer>

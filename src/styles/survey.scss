@@ -169,3 +169,19 @@ $selected-btn-color: rgba($lowest-contrast, 0.6);
     }
   }
 }
+
+.stockfish-text {
+  color: #53a7a2 !important;
+}
+
+.human-text {
+  color: #ff8946 !important;
+}
+
+.disabled-container {
+  background-color: rgba($lowest-contrast, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

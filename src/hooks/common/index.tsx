@@ -77,7 +77,9 @@ export const useEventNumber: UseEventNumberHook = () => {
 
 export type UseBoardController = (
   plysLength: number,
-  logEvent: any
+  logEvent: any,
+  defaultOrientation?: Color,
+  defaultPlyIndex?: number
 ) => [
   [number, SetIndexFunction],
   [
@@ -86,19 +88,22 @@ export type UseBoardController = (
     VoidFunction | null,
     VoidFunction | null
   ],
-  [Color, VoidFunction]
+  [Color, VoidFunction, React.Dispatch<React.SetStateAction<Color>>]
 ];
 
 export const useBoardController: UseBoardController = (
   plysLength,
-  logEvent
+  logEvent,
+  defaultOrientation: Color = "white",
+  defaultPlyIndex = 0
 ) => {
-  const [currentPlyIndex, setCurrentPlyIndex] = useState<number>(0);
-  const [orientation, setOrientation] = useState<Color>("white");
+  const [currentPlyIndex, setCurrentPlyIndex] =
+    useState<number>(defaultPlyIndex);
+  const [orientation, setOrientation] = useState<Color>(defaultOrientation);
 
   useEffect(() => {
-    setCurrentPlyIndex(0);
-  }, [plysLength]);
+    setCurrentPlyIndex(defaultPlyIndex);
+  }, [defaultPlyIndex, plysLength]);
 
   const loggedGetFirstPly = useCallback(() => {
     setCurrentPlyIndex(0);
@@ -203,7 +208,7 @@ export const useBoardController: UseBoardController = (
   return [
     [currentPlyIndex, setPlyIndex],
     [getFirstPly, getPreviousPly, getNextPly, getLastPly],
-    [orientation, changeBoardOrientation],
+    [orientation, changeBoardOrientation, setOrientation],
   ];
 };
 

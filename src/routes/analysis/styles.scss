@@ -1,0 +1,13 @@
+@import "../../styles/chess.scss";
+@import "../../styles/survey.scss";
+
+.feedback-container {
+  @extend .stretched;
+  @extend .shadowed;
+  @extend .bordered;
+
+  background-color: $lower-contrast;
+  align-items: flex-start;
+  text-align: left;
+  padding: 10px;
+}
