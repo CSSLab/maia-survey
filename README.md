@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# Maia Survey
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A collection of deployed surveys/tasks, puzzles and tools relating to [Maia](https://github.com/CSSLab/maia-chess).
 
-## Available Scripts
+## Get Started
 
-In the project directory, you can run:
+This project currently uses `node-sass: 5.0.0` which is only compatiable with node versions within `[14, 15)`, to manage multiple versions of node, I recommend [nvm](https://github.com/nvm-sh/nvm) or [n](https://www.npmjs.com/package/n). Dependencies are managed with [yarn](https://github.com/yarnpkg/yarn/blob/master/README.md).
 
-### `yarn start`
+## Development
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Styles
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Most of the styles in this project are written with global scss, and can be found under `src/styles`. 
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A lot of base styles can be found under `src/styles/foundation`such as colour variables and layout code. More specialized scss can be found in files such as  `src/styles/chess.scss`. 
 
-### `yarn build`
+Scss has a number of benefits over css, such as variables, imports, extending other style classes and such. The syntax is very simple and you can learn more about it [here](https://sass-lang.com/documentation/syntax). 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Surveys & Tools
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Each survey is a route made up of components, and I've tried reall hard to keep the UI code clean and separate from the logic through the use of custom hooks. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For example, the `useBoardController` hook maintains state about the board's present state such as the current selected ply, orientation and such. It also returns various functions to manipulate the current state. 
 
-### `yarn eject`
+Each survey contains a main hook, such as the `useTuringHook`, that is made up of many common hooks such as `useBoardController`, `useGamesHook` (helps retain history) and the `useEventNumber`. These hooks combine to provide the full logic required to power the survey. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Notable components include: 
+ 1. MovseContainer (Renders the 2 column move list)
+ 2. BoardController (Renders the arrows used to paginate moves and flip orientation)
+ 3. Chessground (Renders the chessboard)
+ 4. PlyPlot (Renders plot for the puzzle & maia analysis)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### API
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Users are given an account and authenticated on visit, each of the authentication api calls returns a JWT that is then stored in the server with an expiration date. All authenticated api calls should take the form:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```ts
+const res = await fetch(buildUrl(`turing/game`), {
+    headers: await getDefaultHeaders(),
+});
+```
 
-## Learn More
+`getDefaultHeaders` returns an object with the auth token set, and `buildUrl` will return the full api and pull the base url from the environment variables.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
